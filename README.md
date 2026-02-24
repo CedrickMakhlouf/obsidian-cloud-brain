@@ -30,7 +30,7 @@ curl -X POST https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerap
 ## The Problem
 
 After years of note-taking in Obsidian I ended up with a vault of 1000+ Markdown files.
-Keyword search stopped working — I knew I had written something down, just not where or how.
+Keyword search stopped working, I knew I had written something down, just not where or how.
 **Keyword search doesn't solve this. Semantic search does.**
 
 ## The Solution
@@ -171,7 +171,7 @@ python src/ingestion/upload_vault.py
 python src/ingestion/build_index.py
 ```
 
-The live API picks up the new notes immediately — no redeploy needed.
+The live API picks up the new notes immediately, no redeploy needed.
 
 ---
 
