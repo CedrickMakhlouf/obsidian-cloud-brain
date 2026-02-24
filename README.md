@@ -7,9 +7,9 @@
 ![Azure](https://img.shields.io/badge/cloud-Azure-0078D4)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## Live Demo
+---
 
-**API**: https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/docs
+### 🚀 [Try the live API on Azure →](https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/docs)
 
 ```bash
 curl -X POST https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/ask \
