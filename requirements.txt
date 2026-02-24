@@ -1,0 +1,27 @@
+# --- Web Framework ---
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+pydantic==2.7.1
+pydantic-settings==2.3.1
+
+# --- Azure SDKs ---
+azure-storage-blob==12.20.0
+azure-search-documents==11.6.0b4
+azure-identity==1.17.1
+openai==1.35.3
+
+# --- AI / RAG ---
+langchain==0.2.5
+langchain-openai==0.1.8
+langchain-community==0.2.5
+
+# --- Data / Utilities ---
+python-frontmatter==1.1.0
+python-dotenv==1.0.1
+tiktoken==0.7.0
+
+# --- Dev / Test ---
+pytest==8.2.2
+pytest-asyncio==0.23.7
+httpx==0.27.0
+ruff==0.4.9

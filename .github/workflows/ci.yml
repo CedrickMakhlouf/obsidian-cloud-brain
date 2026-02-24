@@ -1,0 +1,48 @@
+# ============================================================
+# CI Pipeline – Obsidian Cloud Brain
+# Triggered on every push to main or a pull request.
+# Steps: lint (ruff) → unit tests (pytest)
+# ============================================================
+
+name: CI – Lint & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    name: Lint & Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: 🔍 Lint with Ruff
+        run: ruff check src/ tests/
+
+      - name: 🧪 Run tests with Pytest
+        env:
+          # Dummy values so pydantic-settings doesn't raise an error during tests
+          AZURE_OPENAI_ENDPOINT: "https://dummy.openai.azure.com/"
+          AZURE_OPENAI_API_KEY: "dummy-key"
+          AZURE_SEARCH_SERVICE_ENDPOINT: "https://dummy.search.windows.net"
+          AZURE_SEARCH_ADMIN_KEY: "dummy-key"
+          AZURE_STORAGE_CONNECTION_STRING: "DefaultEndpointsProtocol=https;AccountName=dummy;AccountKey=ZHVtbXk=;EndpointSuffix=core.windows.net"
+        run: pytest tests/ -v --tb=short

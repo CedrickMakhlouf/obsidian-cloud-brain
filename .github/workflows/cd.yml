@@ -1,0 +1,59 @@
+# ============================================================
+# CD Pipeline – Deploy to Azure Container Apps
+# Triggered after a successful merge to main.
+#
+# Required GitHub Secrets:
+#   AZURE_CREDENTIALS       – JSON output of: az ad sp create-for-rbac
+#   REGISTRY_LOGIN_SERVER   – e.g. obsidianacr.azurecr.io
+#   REGISTRY_USERNAME       – ACR username
+#   REGISTRY_PASSWORD       – ACR password
+#   RESOURCE_GROUP          – e.g. rg-obsidian-brain
+#   CONTAINER_APP_NAME      – e.g. obsidian-api
+# ============================================================
+
+name: CD – Deploy to Azure
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    name: Build Docker image & Deploy
+    runs-on: ubuntu-latest
+    needs: []   # Add 'lint-and-test' to combine CI and CD into one workflow
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔑 Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 🐳 Login to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: 🏗️ Build & Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.REGISTRY_LOGIN_SERVER }}/obsidian-api:latest
+            ${{ secrets.REGISTRY_LOGIN_SERVER }}/obsidian-api:${{ github.sha }}
+
+      - name: 🚀 Deploy to Azure Container Apps
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          resourceGroup: ${{ secrets.RESOURCE_GROUP }}
+          containerAppName: ${{ secrets.CONTAINER_APP_NAME }}
+          imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/obsidian-api:${{ github.sha }}
+
+      - name: ✅ Deployment successful
+        run: echo "API successfully deployed to Azure Container Apps!"
