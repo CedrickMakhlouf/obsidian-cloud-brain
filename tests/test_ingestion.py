@@ -2,9 +2,7 @@
 
 import hashlib
 from pathlib import Path
-from unittest.mock import MagicMock, patch
 
-import pytest
 
 from src.ingestion.upload_vault import compute_md5, parse_note
 

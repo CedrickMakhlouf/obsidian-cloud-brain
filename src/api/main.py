@@ -1,7 +1,6 @@
 """Phase 3 – FastAPI application: REST interface for the Obsidian Cloud Brain."""
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from src.retrieval.rag import ask
