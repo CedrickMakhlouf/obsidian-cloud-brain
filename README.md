@@ -7,6 +7,16 @@
 ![Azure](https://img.shields.io/badge/cloud-Azure-0078D4)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+## Live Demo
+
+**API**: https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/docs
+
+```bash
+curl -X POST https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What do I know about deep learning?"}'
+```
+
 ---
 
 ## The Problem
@@ -88,7 +98,7 @@ obsidian-cloud-brain/
 ### 1. Set up environment
 
 ```bash
-git clone https://github.com/YourName/obsidian-cloud-brain.git
+git clone https://github.com/CedrickMakhlouf/obsidian-cloud-brain.git
 cd obsidian-cloud-brain
 
 python -m venv .venv
