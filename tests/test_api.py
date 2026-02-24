@@ -1,4 +1,4 @@
-"""Tests voor de RAG API endpoints."""
+"""Tests for the RAG API endpoints."""
 
 from fastapi.testclient import TestClient
 from unittest.mock import patch
@@ -22,14 +22,14 @@ def test_root():
 
 def test_ask_endpoint_success():
     mock_result = {
-        "answer": "Azure is een cloud platform.",
+        "answer": "Azure is a cloud platform.",
         "sources": [{"title": "Azure Intro", "path": "azure/intro.md"}],
     }
     with patch("src.api.main.ask", return_value=mock_result):
-        response = client.post("/ask", json={"question": "Wat is Azure?"})
+        response = client.post("/ask", json={"question": "What is Azure?"})
     assert response.status_code == 200
     data = response.json()
-    assert data["answer"] == "Azure is een cloud platform."
+    assert data["answer"] == "Azure is a cloud platform."
     assert len(data["sources"]) == 1
 
 
@@ -41,5 +41,5 @@ def test_ask_endpoint_validation_error():
 
 def test_ask_endpoint_server_error():
     with patch("src.api.main.ask", side_effect=Exception("Azure is down")):
-        response = client.post("/ask", json={"question": "Wat is mijn planning?"})
+        response = client.post("/ask", json={"question": "What is my schedule?"})
     assert response.status_code == 500

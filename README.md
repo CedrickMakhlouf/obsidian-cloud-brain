@@ -11,7 +11,15 @@
 
 ### 🚀 [Try the live API on Azure →](https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/docs)
 
+```powershell
+# PowerShell
+curl.exe -X POST https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/ask `
+  -H "Content-Type: application/json" `
+  -d '{\"question\": \"What do I know about deep learning?\"}'
+```
+
 ```bash
+# bash / WSL / macOS
 curl -X POST https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "What do I know about deep learning?"}'
