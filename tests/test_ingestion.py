@@ -1,8 +1,8 @@
-"""Tests voor de ingestion-module."""
+"""Tests for the ingestion module."""
 
 import hashlib
 from pathlib import Path
-
+from unittest.mock import patch
 
 from src.ingestion.upload_vault import compute_md5, parse_note
 
@@ -23,7 +23,9 @@ Dit is de inhoud van mijn testnotitie.
     note_file = tmp_path / "test_note.md"
     note_file.write_text(note_content, encoding="utf-8")
 
-    result = parse_note(note_file)
+    with patch("src.ingestion.upload_vault.settings") as mock_settings:
+        mock_settings.obsidian_vault_path = str(tmp_path)
+        result = parse_note(note_file)
 
     assert result["title"] == "test_note"
     assert "azure" in result["tags"]
@@ -36,7 +38,9 @@ def test_parse_note_no_frontmatter(tmp_path: Path):
     note_file = tmp_path / "plain.md"
     note_file.write_text("Geen frontmatter hier.", encoding="utf-8")
 
-    result = parse_note(note_file)
+    with patch("src.ingestion.upload_vault.settings") as mock_settings:
+        mock_settings.obsidian_vault_path = str(tmp_path)
+        result = parse_note(note_file)
 
     assert result["title"] == "plain"
     assert result["tags"] == []
