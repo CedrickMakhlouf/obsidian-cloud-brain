@@ -16,7 +16,7 @@ If the answer is not in the context, say so honestly.
 Always respond in the same language as the question.
 """
 
-# ── Clients (éénmalig aangemaakt bij import) ───────────────────────────────────
+# ── Clients (created once at import) ─────────────────────────────────────────
 _search_client = SearchClient(
     settings.azure_search_service_endpoint,
     settings.azure_search_index_name,
@@ -77,7 +77,7 @@ def ask(question: str, top_k: int = 5) -> dict:
 
     if not context_docs:
         return {
-            "answer": "Geen relevante notities gevonden om de vraag te beantwoorden.",
+            "answer": "No relevant notes found to answer the question.",
             "sources": [],
         }
 
