@@ -159,6 +159,22 @@ curl -X POST http://localhost:8000/ask \
 
 ---
 
+## Adding New Notes
+
+When you add or update notes in your Obsidian vault, re-run the two ingestion scripts:
+
+```bash
+# Step 1: sync changes to Blob Storage (only uploads new/changed notes via MD5 check)
+python src/ingestion/upload_vault.py
+
+# Step 2: rebuild the vector index in Azure AI Search
+python src/ingestion/build_index.py
+```
+
+The live API picks up the new notes immediately — no redeploy needed.
+
+---
+
 ## Docker
 
 ```bash
