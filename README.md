@@ -11,6 +11,9 @@
 
 ### 🚀 [Try the live API on Azure →](https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/docs)
 
+> **Note:** The live demo is indexed on a small set of sample notes — not my full private vault. Deploy your own instance to query your own notes.
+
+
 ```powershell
 # PowerShell
 curl.exe -X POST https://obsidian-api.ambitiousmoss-cd4cf8a8.eastus.azurecontainerapps.io/ask `

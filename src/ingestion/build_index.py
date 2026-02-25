@@ -115,6 +115,12 @@ def run() -> None:
 
     ensure_index(index_client)
 
+    # Delete all existing documents so removed blobs are no longer searchable
+    existing_docs = list(search_client.search("*", select=["id"]))
+    if existing_docs:
+        search_client.delete_documents(existing_docs)
+        logger.info("Cleared %d existing documents from index.", len(existing_docs))
+
     blobs = list(container.list_blobs())
     logger.info("Blobs to index: %d", len(blobs))
 
