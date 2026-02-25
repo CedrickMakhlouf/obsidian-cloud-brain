@@ -3,6 +3,7 @@
 > A scalable RAG architecture on Azure to query 1000+ Obsidian notes in natural language.
 
 ![CI](https://github.com/CedrickMakhlouf/obsidian-cloud-brain/actions/workflows/ci.yml/badge.svg)
+![CD](https://github.com/CedrickMakhlouf/obsidian-cloud-brain/actions/workflows/cd.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![Azure](https://img.shields.io/badge/cloud-Azure-0078D4)
 ![License](https://img.shields.io/badge/license-MIT-green)
