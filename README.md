@@ -232,4 +232,4 @@ The full Azure environment (Storage Account, AI Search, Container Apps) is defin
 
 ## License
 
-MIT – see [LICENSE](LICENSE)
+MIT
